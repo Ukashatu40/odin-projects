@@ -1,0 +1,25 @@
+<!-- index.ejs -->
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="bg-gradient-to-br from-teal-400 to-blue-500 p-6">
+    <a href="/new" class="mt-6 mb-6 inline-block bg-green-500 text-white px-6 py-3 rounded-full hover:bg-green-600 text-center">Add New</a>
+    <div class="space-y-6 md:w-1/2 mx-auto">
+      <% messages.forEach((message) => { %>
+      
+            <div class="bg-gray-800/90 text-white p-6 rounded-xl shadow-2xl transform hover:scale-105 transition duration-300">
+              <h1 class="text-4xl font-extrabold text-yellow-300"><%= message.text %></h1>
+              <p class="text-lg text-gray-300 mt-3"><%= message.user %></p>
+              <p class="text-md text-gray-400 mt-1"><%= message.added %></p>
+              <button  class="mt-6 bg-yellow-500 text-gray-900 px-6 py-3 rounded-full hover:bg-yellow-600"><a href="/message/<%= message.user %>">Open</a></button>
+            </div>
+        
+      <% }); %>
+    </div>
+  </body>
+</html>
