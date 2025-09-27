@@ -11,13 +11,16 @@ app.use("/", indexRouter);
 app.use("/message", indexRouter);
 
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, (error) => {
+// Tell the app to listen on the dynamically assigned PORT and on all network interfaces ('0.0.0.0')
+app.listen(PORT, '0.0.0.0', (error) => {
     if (error) {
         throw error;
     }
+    // The console log now reflects the actual port being used
     console.log(`Mini Message Board app - listening on port ${PORT}!`);
 });
+
 
 module.exports = app;
