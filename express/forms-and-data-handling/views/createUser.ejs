@@ -1,20 +1,46 @@
-<!-- views/createUser.ejs -->
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-  </head>
-<body>
-  <h1><%= title %></h1>
-  <%- include("partials/errors.ejs") %>
-
-  <form action="/create" method="POST">
-    <label for="firstName">First Name: </label>
-    <input type="text" name="firstName" id="firstName" required>
-    <label for="lastName">Last Name: </label>
-    <input type="text" name="lastName" id="lastName" required>
-    <button type="submit">Submit</button>
-  </form>
-  <a href="/">Back to home</a>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title><%= title %></title>
+</head>
+<body class="bg-gradient-to-r from-green-100 to-teal-100 min-h-screen">
+  <div class="container mx-auto p-6">
+    <header class="mb-8">
+      <h1 class="text-4xl font-semibold text-teal-800 text-center"><%= title %></h1>
+    </header>
+    <form action="/search" method="get" class="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto space-y-4">
+      <div class="mb-6">
+        <input type="search" name="q" placeholder="Search users by Name or Email..." class="w-full p-3 border border-teal-300 rounded-lg focus:ring-2 focus:ring-teal-500" value="<%= typeof query !== 'undefined' ? query : '' %>">
+      </div>
+    </form>
+    <%- include("partials/errors.ejs") %>
+    <form action="/create" method="POST" class="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto space-y-4">
+      <div>
+        <label for="firstName" class="block text-lg text-teal-800 font-medium">First Name:</label>
+        <input type="text" name="firstName" id="firstName" required class="mt-1 w-full p-2 border border-teal-300 rounded-lg focus:ring-2 focus:ring-teal-500">
+      </div>
+      <div>
+        <label for="lastName" class="block text-lg text-teal-800 font-medium">Last Name:</label>
+        <input type="text" name="lastName" id="lastName" required class="mt-1 w-full p-2 border border-teal-300 rounded-lg focus:ring-2 focus:ring-teal-500">
+      </div>
+      <div>
+        <label for="email" class="block text-lg text-teal-800 font-medium">Email:</label>
+        <input type="email" name="email" id="email" required class="mt-1 w-full p-2 border border-teal-300 rounded-lg focus:ring-2 focus:ring-teal-500">
+      </div>
+      <div>
+        <label for="age" class="block text-lg text-teal-800 font-medium">Age:</label>
+        <input type="number" name="age" id="age" required class="mt-1 w-full p-2 border border-teal-300 rounded-lg focus:ring-2 focus:ring-teal-500">
+      </div>
+      <div>
+        <label for="bio" class="block text-lg text-teal-800 font-medium">Bio:</label>
+        <textarea name="bio" id="bio" required class="mt-1 w-full p-2 border border-teal-300 rounded-lg focus:ring-2 focus:ring-teal-500 h-24"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-600 transition-colors">Submit</button>
+    </form>
+    <a href="/" class="mt-4 block text-center text-teal-600 hover:text-teal-800 font-medium">Back to home</a>
+  </div>
 </body>
 </html>

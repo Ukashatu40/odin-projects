@@ -11,8 +11,9 @@
     <header class="mb-8">
       <h1 class="text-4xl font-semibold text-teal-800 text-center"><%= title %></h1>
     </header>
-    <ul class="space-y-3">
-      <% if (locals.users) {%>
+    
+    <% if (locals.users && users.length > 0) { %>
+      <ul class="space-y-3">
         <% users.forEach(user => { %>
           <li class="bg-white p-5 rounded-lg shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between border-l-4 border-teal-500 hover:shadow-xl transition-shadow">
             <div class="mb-2 md:mb-0">
@@ -30,8 +31,11 @@
             </div>
           </li>
         <% }); %>
-      <% } %>
-    </ul>
+      </ul>
+    <% } else { %>
+      <p class="text-center text-gray-600">No users found.</p>
+    <% } %>
+    
     <a href="/create" class="mt-8 block w-full max-w-xs mx-auto bg-teal-500 text-white px-6 py-3 rounded-lg hover:bg-teal-600 text-center font-medium transition-colors">Create a user</a>
   </div>
 </body>
