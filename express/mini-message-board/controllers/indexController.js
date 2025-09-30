@@ -1,11 +1,13 @@
-const messages = require("../db");
+const {getAllUsernames, insertMessage, } = require("../db/queries");
 
-const indexController = (req, res) => {
-    res.render("index", {title: "Mini Messageboard",messages: messages});
+const indexController = async (req, res) => {
+    const messages = await getAllUsernames();
+    res.render("index", {title: "Mini Messageboard", messages: messages});
 }
 
-const authorController = (req, res) => {
+const authorController = async (req, res) => {
     const author = req.params.author;
+    const messages = await getAllUsernames();
     const filteredMessages = messages.filter(msg => msg.user === author);
     res.render("index", {title: `Messages by ${author}`, messages: filteredMessages});
 }
