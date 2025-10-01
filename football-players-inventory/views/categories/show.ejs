@@ -1,0 +1,31 @@
+<%- include('../layouts/main') %>
+<div class="max-w-4xl mx-auto bg-white p-6 rounded shadow">
+  <h2 class="text-2xl font-bold mb-4"><%= category.name %></h2>
+  <p class="text-gray-600 mb-4"><%= category.description %></p>
+  <div class="mb-6">
+    <h3 class="text-xl font-semibold mb-2">Players in this Category</h3>
+    <% if (players.length === 0) { %>
+      <p class="text-gray-600">No players in this category. <a href="/players/new" class="text-blue-600 hover:underline">Add a new player</a>.</p>
+    <% } else { %>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <% players.forEach(player => { %>
+          <li class="border p-4 rounded hover:bg-gray-50">
+            <a href="/players/<%= player.id %>" class="text-lg font-semibold text-blue-600 hover:underline"><%= player.name %></a>
+            <p class="text-gray-600">Position: <%= player.position %></p>
+            <p class="text-gray-600">Club: <%= player.club %></p>
+            <p class="text-gray-600">Nationality: <%= player.nationality %></p>
+            <p class="text-gray-600">Age: <%= player.age %></p>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </div>
+  <div class="flex space-x-4">
+    <a href="/categories/<%= category.id %>/edit" class="bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600">Edit Category</a>
+    <form action="/categories/<%= category.id %>?_method=DELETE" method="POST">
+      <input type="hidden" name="adminPassword" value="">
+      <button type="submit" formaction="/admin/verify?redirect=/categories/<%= category.id %>?_method=DELETE" class="bg-red-500 text-white p-2 rounded hover:bg-red-600">Delete Category</button>
+    </form>
+  </div>
+  <a href="/categories" class="mt-4 inline-block text-blue-600 hover:underline">Back to Categories</a>
+</div>

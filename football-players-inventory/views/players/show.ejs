@@ -1,0 +1,19 @@
+<%- include('../layouts/main') %>
+<div class="max-w-2xl mx-auto bg-white p-6 rounded shadow">
+  <h2 class="text-2xl font-bold mb-4"><%= player.name %></h2>
+  <div class="grid grid-cols-2 gap-4">
+    <p><strong>Category:</strong> <%= player.category_name %></p>
+    <p><strong>Position:</strong> <%= player.position %></p>
+    <p><strong>Club:</strong> <%= player.club %></p>
+    <p><strong>Nationality:</strong> <%= player.nationality %></p>
+    <p><strong>Age:</strong> <%= player.age %></p>
+  </div>
+  <div class="mt-6 flex space-x-4">
+    <a href="/players/<%= player.id %>/edit" class="bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600">Edit Player</a>
+    <form action="/players/<%= player.id %>?_method=DELETE" method="POST">
+      <input type="hidden" name="adminPassword" value="">
+      <button type="submit" formaction="/admin/verify?redirect=/players/<%= player.id %>?_method=DELETE" class="bg-red-500 text-white p-2 rounded hover:bg-red-600">Delete Player</button>
+    </form>
+  </div>
+  <a href="/categories" class="mt-4 inline-block text-blue-600 hover:underline">Back to Categories</a>
+</div>
