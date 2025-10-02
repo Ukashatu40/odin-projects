@@ -24,8 +24,8 @@ app.use(express.static('public'));
 
 // Routes
 app.use('/', homeRouter);
-app.use('/categories', require('./routes/categories'));
-app.use('/players', require('./routes/players'));
+app.use('/categories', require('./routes/categoriesRouter'));
+app.use('/players', require('./routes/playersRouter'));
 app.use('/admin', require('./routes/auth'));
 
 

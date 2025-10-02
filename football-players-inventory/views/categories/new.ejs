@@ -1,4 +1,4 @@
-<%- include("../layouts/main") %>
+<%- include("../layouts/header") %>
 <div class="max-w-md mx-auto bg-white p-6 rounded shadow">
   <h2 class="text-xl font-bold mb-4">Add New Category</h2>
   <% if (errors && errors.length > 0) { %>
@@ -11,13 +11,14 @@
   <form action="/categories" method="POST">
     <div class="mb-4">
       <label for="name" class="block text-sm font-medium">Category Name</label>
-      <input type="text" id="name" name="name" value="<%= req.body.name || '' %>" class="w-full border p-2 rounded">
+      <input type="text" id="name" name="name" value="" class="w-full border p-2 rounded">
     </div>
     <div class="mb-4">
       <label for="description" class="block text-sm font-medium">Description</label>
-      <textarea id="description" name="description" class="w-full border p-2 rounded" rows="4"><%= req.body.description || '' %></textarea>
+      <textarea id="description" name="description" class="w-full border p-2 rounded" rows="4"></textarea>
     </div>
     <button type="submit" class="bg-blue-600 text-white p-2 rounded hover:bg-blue-700">Add Category</button>
   </form>
   <a href="/categories" class="mt-4 inline-block text-blue-600 hover:underline">Back to Categories</a>
 </div>
+<%- include("../layouts/footer") %>
