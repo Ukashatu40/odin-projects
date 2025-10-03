@@ -1,5 +1,3 @@
-const { Pool } = require('pg');
-const pool = new Pool({ connectionString: process.env.POSTGRES_URI_DEV });
 const { getAllCategories, insertCategory, getCategoryById, getPlayersByCategoryId, updateCategoryById, deleteCategoryById } = require('../db/queries');
 
 exports.getAllCategories = async (req, res) => {
@@ -70,9 +68,7 @@ exports.deleteCategory = async (req, res) => {
   console.log('deleteCategory - Deleting category ID:', id);
   try {
     const result = await deleteCategoryById(id);
-    if (result.rowCount === 0) {
-      return res.status(404).send('Category not found');
-    }
+    console.log('deleteCategory - Delete result:', result);
     res.redirect('/categories');
   } catch (err) {
     console.error('Error deleting category:', err);
