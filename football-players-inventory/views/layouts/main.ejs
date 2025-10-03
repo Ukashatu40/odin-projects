@@ -12,8 +12,8 @@
           <div class="mt-2 flex space-x-2">
             <a href="/categories/<%= category.id %>/edit" class="text-yellow-500 hover:underline">Edit</a>
             <form action="/categories/<%= category.id %>?_method=DELETE" method="POST">
-              <input type="hidden" name="adminPassword" value="">
-              <button type="submit" formaction="/admin/verify?redirect=/categories/<%= category.id %>?_method=DELETE" class="text-red-500 hover:underline">Delete</button>
+              <input type="hidden" name="adminPassword" value="1234">
+              <button type="submit"  class="text-red-500 hover:underline">Delete</button>
             </form>
           </div>
         </li>

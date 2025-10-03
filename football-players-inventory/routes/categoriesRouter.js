@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const categoryController = require('../controllers/categoryController');
-const { validateCategory, validateUpdatedCategory, validateDeleteCategory } = require('../validators/validate');
-const {validateCategoryErrorsMiddleware, validateCategoryUpdateMiddleware, deleteCategoryMiddelware} = require('../middlewares/middleware');
+const { validateCategory, validateUpdatedCategory, validateDeleteCategory } = require('../validators/categoryValidators');
+const {validateCategoryErrorsMiddleware, validateCategoryUpdateMiddleware, deleteCategoryMiddelware} = require('../middlewares/categoryMiddleware');
 
 // Middleware to check admin password
 const verifyAdmin = (req, res, next) => {
+  console.log('Verifying admin password from request body:', req.body);
   if (req.body.adminPassword === process.env.ADMIN_PASSWORD) {
     next();
   } else {

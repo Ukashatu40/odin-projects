@@ -12,11 +12,10 @@
     <input type="hidden" name="redirect" value="<%= redirect %>">
     <div class="mb-4">
       <label for="adminPassword" class="block text-sm font-medium">Admin Password</label>
-      <input type="password" id="adminPassword" name="adminPassword" class="w-full border p-2 rounded" required>
+      <input type="password" id="adminPassword" name="adminPassword" class="w-full border p-2 rounded">
     </div>
     <button type="submit" class="bg-blue-600 text-white p-2 rounded hover:bg-blue-700">Verify</button>
   </form>
-  <p>Redirect URL: <%= redirect %></p> <!-- Debug: Display redirect URL -->
   <a href="/categories" class="mt-4 inline-block text-blue-600 hover:underline">Back to Categories</a>
 </div>
 <%- include('../layouts/footer') %>

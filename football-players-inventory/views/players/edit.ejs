@@ -1,4 +1,4 @@
-<%- include('../layouts/main') %>
+<%- include('../layouts/header') %>
 <div class="max-w-md mx-auto bg-white p-6 rounded shadow">
   <h2 class="text-xl font-bold mb-4">Edit Player</h2>
   <% if (errors && errors.length > 0) { %>
@@ -39,9 +39,10 @@
     </div>
     <div class="mb-4">
       <label for="adminPassword" class="block text-sm font-medium">Admin Password</label>
-      <input type="password" id="adminPassword" name="adminPassword" class="w-full border p-2 rounded">
+      <input type="password" id="adminPassword" name="adminPassword" placeholder="1234" class="w-full border p-2 rounded">
     </div>
     <button type="submit" class="bg-blue-600 text-white p-2 rounded hover:bg-blue-700">Update Player</button>
   </form>
   <a href="/players/<%= player.id %>" class="mt-4 inline-block text-blue-600 hover:underline">Back to Player</a>
 </div>
+<%- include('../layouts/footer') %>

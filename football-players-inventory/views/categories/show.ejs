@@ -23,8 +23,8 @@
   <div class="flex space-x-4">
     <a href="/categories/<%= category.id %>/edit" class="bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600">Edit Category</a>
     <form action="/categories/<%= category.id %>?_method=DELETE" method="POST">
-      <input type="hidden" name="adminPassword" value="">
-      <button type="submit" formaction="/admin/verify?redirect=/categories/<%= category.id %>?_method=DELETE" class="bg-red-500 text-white p-2 rounded hover:bg-red-600">Delete Category</button>
+      <input type="hidden" name="adminPassword" value="1234">
+      <button type="submit" class="bg-red-500 text-white p-2 rounded hover:bg-red-600">Delete Category</button>
     </form>
   </div>
   <a href="/categories" class="mt-4 inline-block text-blue-600 hover:underline">Back to Categories</a>

@@ -1,5 +1,5 @@
 const express = require('express');
-const { Pool } = require('pg');
+
 const methodOverride = require('method-override');
 require('dotenv').config();
 
@@ -8,12 +8,7 @@ const homeRouter = require('./routes/homeRouter');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const POSTGRES_URI = process.env.DEVELOPMENT === 'true' ? process.env.POSTGRES_URI_DEV : process.env.POSTGRES_URI_PROD;
-
-// Database connection
-const pool = new Pool({
-  connectionString: POSTGRES_URI,
-});
+// const POSTGRES_URI = process.env.DEVELOPMENT === 'true' ? process.env.POSTGRES_URI_DEV : process.env.POSTGRES_URI_PROD;
 
 // Middleware
 app.set('view engine', 'ejs');

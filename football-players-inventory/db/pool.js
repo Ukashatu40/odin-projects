@@ -13,7 +13,7 @@ require("dotenv").config();
 
 const { Pool } = require("pg");
 
-const POSTGRES_URI = process.env.DEVELOPMENT ? process.env.POSTGRES_URI_DEV : process.env.POSTGRES_URI_PROD;
+const POSTGRES_URI = process.env.DEVELOPMENT === "true" ? process.env.POSTGRES_URI_DEV : process.env.POSTGRES_URI_PROD;
 // Again, this should be read from an environment variable
 module.exports = new Pool({
   connectionString: POSTGRES_URI
