@@ -3,21 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Membership</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .input-field { transition: all 0.3s; }
+    .input-field:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); }
+    .submit-btn:hover { transform: translateY(-2px); }
+  </style>
 </head>
-<body>
-  <form action="/membership" method="POST">
-    <h1>Enter secret code to get membership.</h1>
-    <h2>Its 12345678 btw.</h2>
-    <p>
-      <label for="secret-code">Enter secret code: </label>
-      <input type="text" name="secretCode" id="secret-code">
-    </p>
-    <button type="submit">Get membership</button>
-  </form>
-
-  <% if (typeof error_msg !== 'undefined' && error_msg) { %>
-    <p><%= error_msg %></p>
-  <% } %>
+<body class="bg-gray-50 font-sans">
+  <div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-4 sticky top-0 shadow-lg z-10">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-2xl font-bold">Membership</h1>
+    </div>
+  </div>
+  <div class="max-w-3xl mx-auto px-4 py-8">
+    <div class="bg-white p-8 rounded-xl shadow-lg">
+      <form action="/membership" method="POST" class="space-y-6">
+        <div class="text-center">
+          <h1 class="text-2xl font-bold text-gray-900">Enter Secret Code to Get Membership</h1>
+          <h2 class="text-sm text-gray-500 mt-2">Hint: It's 12345678, but keep it on the down-low!</h2>
+        </div>
+        <div>
+          <label for="secret-code" class="block text-sm font-medium text-gray-900">Enter Secret Code</label>
+          <input type="text" name="secretCode" id="secret-code" required class="input-field mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div>
+          <button type="submit" class="submit-btn w-full px-6 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition duration-300">Get Membership</button>
+        </div>
+      </form>
+      <% if (typeof error_msg !== 'undefined' && error_msg) { %>
+        <p class="mt-4 text-red-600 text-sm text-center"><%= error_msg %></p>
+      <% } %>
+    </div>
+  </div>
 </body>
 </html>

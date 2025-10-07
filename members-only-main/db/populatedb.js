@@ -19,7 +19,7 @@ const { hash } = require('bcrypt')
 require('dotenv').config()
 
 const client = new Client({
-    connectionString: process.env.POSTGRES_URI_DEV
+    connectionString: process.env.POSTGRES_URI_PROD
 })
 
 async function populatedb() {
@@ -29,7 +29,7 @@ async function populatedb() {
 
         // Create tables
         await client.query(`
-            CREATE TABLE users (
+            CREATE TABLE userss (
                 id SERIAL PRIMARY KEY,
                 first_name VARCHAR(100) NOT NULL,
                 last_name VARCHAR(100) NOT NULL,
@@ -39,9 +39,9 @@ async function populatedb() {
                 admin BOOLEAN DEFAULT FALSE
             );
 
-            CREATE TABLE messages (
+            CREATE TABLE messagess (
                 id SERIAL PRIMARY KEY,
-                user_id INT REFERENCES users(id) ON DELETE CASCADE,
+                user_id INT REFERENCES userss(id) ON DELETE CASCADE,
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 title VARCHAR(255) NOT NULL,
                 text TEXT NOT NULL
@@ -62,14 +62,14 @@ async function populatedb() {
         const hash2 = await hash('12345678', 10)
         const hash3 = await hash('12345678', 10)
         await client.query(`
-            INSERT INTO users (first_name, last_name, username, password_hash, membership, admin)
+            INSERT INTO userss (first_name, last_name, username, password_hash, membership, admin)
             VALUES 
             ('Alice', 'Nguyen', 'alice123', $1, FALSE, FALSE),
             ('Jake', 'Chan', 'jake1234', $2, FALSE, TRUE),
             ('Bob', 'Tran', 'bobtran1', $3, TRUE, FALSE);
         `, [hash1, hash2, hash3])
         await client.query(`
-            INSERT INTO messages (user_id, title, text)
+            INSERT INTO messagess (user_id, title, text)
             VALUES
             (1, 'Hello World', 'This is Alice’s first message.'),
             (1, 'Study Note', 'Alice is preparing for exams.'),

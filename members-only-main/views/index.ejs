@@ -4,37 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .post { transition: all 0.3s; }
+        .post:hover { background-color: #f1f5f9; }
+        .avatar { background-color: #3b82f6; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 font-sans">
     <%- include('./header', { title: title, isAuth: isAuth }) %> 
-    <% if (!isAuth) { %>
-        <h1>Hi!, Guest.</h1>
-        <h1>Login or Sign-up to see who is talking.</h1>
-    <% } else { %>
-        <h1>Hi!, <%= user.username %></h1>
-    <% } %>
+    <div class="max-w-3xl mx-auto px-4 py-6">
+        <% if (!isAuth) { %>
+            <div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-8 rounded-xl text-center">
+                <h1 class="text-4xl font-bold">Hi, Guest!</h1>
+                <p class="text-lg mt-3">Join the conversation! Login or Sign-up to see who’s talking.</p>
+                <a href="/login" class="mt-5 inline-block px-8 py-3 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-200 transition">Join Now</a>
+            </div>
+        <% } else { %>
+            <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                <h1 class="text-2xl font-bold text-gray-900">Hi, <%= user.username %>!</h1>
+            </div>
+        <% } %>
 
-    <% users.forEach((obj) => { %>
-        <div>
-            <% if (isAuth && user.membership) { %>
-                <h2><%= obj.username %></h2>
-                <p><%= obj.text %></p>
-                <p><%= obj.timestamp %></p>
-            <% } else if (isAuth && user.admin) { %>
-                <h2><%= obj.username %></h2>
-                <p><%= obj.text %></p>
-                <p><%= obj.timestamp %></p>
-                <a href="/delete-message/<%= obj.message_id %>">Delete Message</a>
-            <% } else { %>
-                <h2>Anonymous</h2>
-                <p><%= obj.text %></p>
-                <p><%= obj.timestamp %></p>  
-            <% } %>
+        <div class="mt-8 space-y-6">
+            <% users.forEach((obj) => { %>
+                <div class="post bg-white p-6 rounded-xl shadow-md flex space-x-4">
+                    <div class="avatar w-12 h-12 rounded-full flex items-center justify-center text-white font-bold">
+                        <%= obj.username ? obj.username[0].toUpperCase() : 'A' %>
+                    </div>
+                    <div class="flex-1">
+                        <% if (isAuth && user.membership) { %>
+                            <h2 class="text-lg font-semibold text-gray-900"><%= obj.username %></h2>
+                            <p class="text-gray-700 mt-1"><%= obj.text %></p>
+                            <p class="text-sm text-gray-500 mt-2"><%= obj.timestamp %></p>
+                        <% } else if (isAuth && user.admin) { %>
+                            <h2 class="text-lg font-semibold text-gray-900"><%= obj.username %></h2>
+                            <p class="text-gray-700 mt-1"><%= obj.text %></p>
+                            <p class="text-sm text-gray-500 mt-2"><%= obj.timestamp %></p>
+                            <a href="/delete-message/<%= obj.message_id %>" class="text-red-600 hover:text-red-800 text-sm font-medium mt-2 inline-block">Delete Message</a>
+                        <% } else { %>
+                            <h2 class="text-lg font-semibold text-gray-900">Anonymous</h2>
+                            <p class="text-gray-700 mt-1"><%= obj.text %></p>
+                            <p class="text-sm text-gray-500 mt-2"><%= obj.timestamp %></p>
+                        <% } %>
+                    </div>
+                </div>
+            <% }) %>
         </div>
-        <br>
-        <hr>
-        <br>
-    <% }) %>
+    </div>
 </body>
 </html>
-

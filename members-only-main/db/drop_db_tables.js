@@ -2,7 +2,7 @@ const { Client } = require('pg')
 require('dotenv').config()
 
 const client = new Client({
-    connectionString: process.env.POSTGRES_URI_DEV
+    connectionString: process.env.POSTGRES_URI_PROD
 })
 
 async function dropTable() {
@@ -11,8 +11,8 @@ async function dropTable() {
         await client.connect()
         console.log("Dropping table...")
         await client.query(`
-            DROP TABLE messages;
-            DROP TABLE users;
+            DROP TABLE messagess;
+            DROP TABLE userss;
             DROP TABLE session;
         `)
         await client.end()

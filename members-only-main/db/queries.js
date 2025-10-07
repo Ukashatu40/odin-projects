@@ -10,12 +10,12 @@ async function getUsersAndMessages() {
                       title,
                   timestamp,
                        text,
-        users.id AS user_id,
-  messages.id AS message_id
+        userss.id AS user_id,
+  messagess.id AS message_id
   
-            FROM users
-            JOIN messages
-              ON users.id = messages.user_id
+            FROM userss
+            JOIN messagess
+              ON userss.id = messagess.user_id
         `)
         return rows
     } catch(err) {
@@ -27,7 +27,7 @@ async function getUsersAndMessages() {
 async function getUserByUsername(username) {
     try {
         const { rows } = await db.query(`
-            SELECT * FROM users
+            SELECT * FROM userss
             WHERE username = $1    
         `, [username])
         return rows[0]
@@ -40,7 +40,7 @@ async function getUserByUsername(username) {
 async function getUser(user_id) {
     try {
         const { rows } = await db.query(`
-            SELECT * FROM users
+            SELECT * FROM userss
             WHERE id = $1    
         `, [user_id])
         return rows[0]
@@ -53,7 +53,7 @@ async function getUser(user_id) {
 async function getHash(user_id) {
     try {
         const { rows } = await db.query(`
-            SELECT password_hash FROM users
+            SELECT password_hash FROM userss
             WHERE id = $1    
         `, [user_id])
         return rows[0].password_hash
@@ -67,7 +67,7 @@ async function addUser(firstname, lastname, username, password, isAdmin) {
     try {
         const hash = await bcrypt.hash(password, 10)
         await db.query(`
-            INSERT INTO users (first_name, last_name, username, password_hash, membership, admin)
+            INSERT INTO userss (first_name, last_name, username, password_hash, membership, admin)
             VALUES ($1, $2, $3, $4, $5, $6)
         `, [firstname, lastname, username, hash, false, isAdmin])
     } catch(err) {
@@ -79,7 +79,7 @@ async function addUser(firstname, lastname, username, password, isAdmin) {
 async function setMembership(user_id, boolean) {
     try {
         await db.query(`
-            UPDATE users
+            UPDATE userss
             SET membership = $1
             WHERE id = $2
         `, [boolean, user_id])
@@ -92,7 +92,7 @@ async function setMembership(user_id, boolean) {
 async function addMessage(user_id, title, message) {
     try {
         await db.query(`
-            INSERT INTO messages
+            INSERT INTO messagess
             (user_id, title, text)
             VALUES 
             ($1, $2, $3)    
@@ -106,7 +106,7 @@ async function addMessage(user_id, title, message) {
 async function deleteMessage(message_id) {
     try {
         await db.query(`
-            DELETE FROM messages
+            DELETE FROM messagess
             WHERE id = $1
         `, [message_id])
     } catch(err) {

@@ -1,7 +1,9 @@
 <% if (errors) { %>
-  <ol>
-    <% errors.forEach((err) => { %>
-      <li><%= err.msg %></li>
-    <% }) %>
-  </ol>
+  <div class="bg-red-100 border-l-4 border-red-500 p-4 rounded-lg mb-6">
+    <ol class="list-disc list-inside text-red-700 text-sm">
+      <% errors.forEach((err) => { %>
+        <li><%= err.msg %></li>
+      <% }) %>
+    </ol>
+  </div>
 <% } %>
