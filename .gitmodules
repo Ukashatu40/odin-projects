@@ -1,3 +1,6 @@
 [submodule "my-file-uploade"]
 	path = my-file-uploade
 	url = https://github.com/columk1/file-uploader.git
+[submodule "my-file-uploader"]
+	path = my-file-uploader
+	url = https://github.com/columk1/file-uploader.git
