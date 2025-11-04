@@ -8,14 +8,14 @@ const app = express();
 app.use(express.json());
 
 const homeRouter = require('./routes/homeRouter');
-const postsRouter = require('./routes/postsRouter');
 const usersRouter = require('./routes/usersRouter');
+const postsRouter = require('./routes/postsRouter');
 const loginRouter = require('./routes/loginRouter');
 const logoutRouter = require('./routes/logoutRouter');
 
 // Mount routers
 app.use("/api/home", homeRouter);
-app.use("api/posts", postsRouter);
+app.use("/api/posts", postsRouter);
 app.use("/api/users", usersRouter);
 app.use("/login", loginRouter);
 app.use("logout", logoutRouter)
