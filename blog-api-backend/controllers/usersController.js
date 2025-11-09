@@ -1,20 +1,15 @@
-const getAllUsers = (req, res) => {
-    const fakeUsers = [
-        {
-            id: 1,
-            username: "Ukashatu40",
-            email: "ukasha@gmail.com",
-            role: "admin",
-            date: Date.now()
-        },
-        {
-            id: 2,
-            username: "JaneDoe",
-            email: "john@gmail.com",
-            role: "user",
-            date: Date.now()
+const { PrismaClient } = require('@prisma/client');
+
+const prisma = new PrismaClient()
+
+const getAllUsers = async (req, res) => {
+    const fakeUsers = await prisma.user.findMany({
+        select: {
+            id: true,
+            name: true,
+            email: true
         }
-    ];
+    });
 
     res.status(200).json(fakeUsers);
 }
