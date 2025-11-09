@@ -12,6 +12,7 @@ const usersRouter = require('./routes/usersRouter');
 const postsRouter = require('./routes/postsRouter');
 const loginRouter = require('./routes/loginRouter');
 const logoutRouter = require('./routes/logoutRouter');
+const registerRouter = require('./routes/registerRouter');
 
 // Mount routers
 app.use("/api/home", homeRouter);
@@ -19,6 +20,7 @@ app.use("/api/posts", postsRouter);
 app.use("/api/users", usersRouter);
 app.use("/login", loginRouter);
 app.use("logout", logoutRouter)
+app.use("/register", registerRouter); // Reusing usersRouter for registration
 
 
 app.listen(process.env.PORT || 3000, () => {
