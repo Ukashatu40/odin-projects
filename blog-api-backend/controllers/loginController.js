@@ -23,10 +23,11 @@ module.exports = async (req, res) => {
             return res.status(401).json({ message: 'Invalid email or password' });
         }
         const token = jwt.sign(
-            { userId: user.id, email: user.email },
+            { userId: user.id, email: user.email, name: user.name },
             process.env.JWT_SECRET,
-            { expiresIn: '7d' }
+            { expiresIn: "7d" }
         );
+        // console.log('Generated JWT Token:', token);
         res.status(200).json({
             message: 'Login successful',
             token,
