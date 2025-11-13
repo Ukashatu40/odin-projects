@@ -39,7 +39,7 @@ const createPost = async (req, res) => {
             data: {
                 title,
                 content,
-                authorId: req.user.id
+                authorId: req.user.userId
             }
         });
         res.status(201).json(newPost);
@@ -49,4 +49,39 @@ const createPost = async (req, res) => {
         res.status(500).json({message: 'Internal server error'});
     }
 }
-module.exports = { getAllPosts, getParticularPost, createPost };
+
+const getCommentsForPost = async (req, res) => {
+    const {id} = req.params;
+    try {
+        const comments = await prisma.comment.findMany({
+            where: { postId: parseInt(id) }
+        });
+        res.status(200).json(comments);
+    } catch (error) {
+        console.error('Error fetching comments for post:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+const addCommentToPost = async (req, res) => {
+    const {id} = req.params;
+    const {content} = req.body;
+    try {
+        if (!content) {
+            return res.status(400).json({ message: 'Content is required' });
+        }
+        const newComment = await prisma.comment.create({
+            data: {
+                content,
+                postId: parseInt(id),
+                authorId: req.user.userId
+            }
+        });
+        res.status(201).json(newComment);
+    } catch (error) {
+        console.error('Error adding comment to post:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
+module.exports = { getAllPosts, getParticularPost, createPost, getCommentsForPost, addCommentToPost };
