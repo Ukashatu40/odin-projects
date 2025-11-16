@@ -20,6 +20,13 @@ const validateLogin = [
         .notEmpty().withMessage('Password is required'),
 ];
 
+const validateUserUpdate = [
+    body('name')
+        .isLength({min: 2}).withMessage('Name must be at least 2 characters long'),
+    body('email')
+        .isEmail().withMessage('Invalid email format')
+];
+
 const validatePostCreation = [
     body('title')
         .notEmpty().withMessage('Title is required')
@@ -35,4 +42,4 @@ const validateComment = [
         .isLength({min: 1}).withMessage('Content must be at least 1 character long'),
 ];
 
-module.exports = {validateRegistration, validatePostCreation, validateComment, validateLogin};
+module.exports = {validateRegistration, validatePostCreation, validateComment, validateLogin, validateUserUpdate};

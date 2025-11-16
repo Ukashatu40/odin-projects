@@ -19,7 +19,7 @@ app.use("/api/home", homeRouter);
 app.use("/api/posts", postsRouter);
 app.use("/api/users", usersRouter);
 app.use("/login", loginRouter);
-app.use("logout", logoutRouter)
+app.use("/logout", logoutRouter)
 app.use("/register", registerRouter); // Reusing usersRouter for registration
 
 
