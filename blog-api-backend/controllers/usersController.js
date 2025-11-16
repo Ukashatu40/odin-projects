@@ -86,5 +86,26 @@ const deleteUser = async (req, res) => {
     }
 }
 
+const updateUser = async (req, res) => {
+    // Implementation for updating a user
+    const { id } = req.params;
+    const { name, email } = req.body;
+    try {
+        const user = await prisma.user.findUnique({
+            where: { id: parseInt(id) }
+        });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        const updatedUser = await prisma.user.update({
+            where: { id: parseInt(id) },
+            data: { name, email }
+        });
+        res.status(200).json({message: 'User updated successfully', user: { id: updatedUser.id, name: updatedUser.name, email: updatedUser.email }});
+    } catch (error) {
+        console.error('Error updating user:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
 
-module.exports = { getAllUsers, getUserById, getPostsByUser, getPostByUserById, deleteUser, };
+module.exports = { getAllUsers, getUserById, getPostsByUser, getPostByUserById, deleteUser, updateUser };
