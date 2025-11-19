@@ -1,11 +1,13 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors'); // Install with: npm install cors
 
 const app = express();
 
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+app.use(cors());
 
 const homeRouter = require('./routes/homeRouter');
 const usersRouter = require('./routes/usersRouter');
