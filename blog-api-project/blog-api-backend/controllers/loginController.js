@@ -1,10 +1,9 @@
-const { PrismaClient } = require('@prisma/client');
+const prisma = require('../prismaClient');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const prisma = new PrismaClient();
 
 module.exports = async (req, res) => {
-    try{
+    try {
         const { email, password } = req.body;
         if (!email || !password) {
             return res.status(400).json({ message: 'Email and password are required' });

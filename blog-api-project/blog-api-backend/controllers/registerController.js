@@ -1,25 +1,24 @@
 require('dotenv').config();
-const {PrismaClient} = require('@prisma/client');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const prisma = new PrismaClient();
+const prisma = require('../prismaClient');
 
 const registerUser = async (req, res) => {
     try {
-        const {name, email, password} = req.body;
+        const { name, email, password } = req.body;
 
         if (!name || !email || !password) {
-            return res.status(400).json({message: 'Name, email, and password are required'});
+            return res.status(400).json({ message: 'Name, email, and password are required' });
         }
 
         // Check if user already exists
         const existingUser = await prisma.user.findUnique({
-            where: {email}
+            where: { email }
         });
 
         if (existingUser) {
-            return res.status(400).json({message: 'User already exists'});
+            return res.status(400).json({ message: 'User already exists' });
         }
 
         // Hash the password
@@ -44,7 +43,7 @@ const registerUser = async (req, res) => {
         });
     } catch (error) {
         console.error('Error registering user:', error);
-        res.status(500).json({message: 'Internal server error'});
+        res.status(500).json({ message: 'Internal server error' });
     }
 }
 

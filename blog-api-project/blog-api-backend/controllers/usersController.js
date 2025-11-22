@@ -1,6 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
-
-const prisma = new PrismaClient()
+const prisma = require('../prismaClient');
 
 const getAllUsers = async (req, res) => {
     const fakeUsers = await prisma.user.findMany({
@@ -101,7 +99,7 @@ const updateUser = async (req, res) => {
             where: { id: parseInt(id) },
             data: { name, email }
         });
-        res.status(200).json({message: 'User updated successfully', user: { id: updatedUser.id, name: updatedUser.name, email: updatedUser.email }});
+        res.status(200).json({ message: 'User updated successfully', user: { id: updatedUser.id, name: updatedUser.name, email: updatedUser.email } });
     } catch (error) {
         console.error('Error updating user:', error);
         res.status(500).json({ message: 'Internal server error' });
