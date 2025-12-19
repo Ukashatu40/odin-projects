@@ -10,7 +10,7 @@ const bcrypt = require("bcryptjs");
 const PosgtresStore = require('connect-pg-simple')(session);
 require("dotenv").config();
 
-
+// Checking if wwe are in the Development Mode
 const POSTGRES_URI = process.env.DEVELOPMENT === "true" ? process.env.POSTGRES_URI_DEV : process.env.POSTGRES_URI_PROD;
 const pool = new Pool({
   // add your configuration
