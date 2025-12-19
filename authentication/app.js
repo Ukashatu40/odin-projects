@@ -20,6 +20,8 @@ const sessionStore = new PosgtresStore({
   pool: pool,                // Connection pool
   tableName: 'session'   // Use another table-name than the default "session" one
 });
+
+// Using Local Strategy with passortjs
 passport.use(
     new LocalStrategy(async (username, password, done) => {
       try {
