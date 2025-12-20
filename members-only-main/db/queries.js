@@ -1,6 +1,7 @@
 const db = require('./pool')
 const bcrypt = require('bcrypt')
 
+// Fetch users and their associated messages 
 async function getUsersAndMessages() {
     try {
         const { rows } = await db.query(`
