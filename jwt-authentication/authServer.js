@@ -8,6 +8,7 @@ app.use(express.json())
 
 let refreshTokens = []
 
+// Regenerate Token
 app.post('/token', (req, res) => {
   const refreshToken = req.body.token
   if (refreshToken == null) return res.sendStatus(401)
