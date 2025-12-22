@@ -26,9 +26,10 @@ app.delete('/logout', (req, res) => {
   res.sendStatus(204)
 })
 
+// Login
 app.post('/login', (req, res) => {
+  
   // Authenticate User
-
   const username = req.body.username
   const user = { name: username }
 
